@@ -35,6 +35,12 @@ export class AppController {
     return this.appService.getHello();
   }
 
+  /**
+   * @name Database의_모든내용을_조회하여_반환하라
+   * 1) Endpoint : http://localhost:5000/names
+   * 2) Method : Get
+   * @returns
+   */
   @Get('/names') // AppController 로 들어온 요청 중 localhost:5000/app/names 으로 온 Get 요청을 처리하라.
   getNameList(): NameInf[] {
     return this.appService.getNameList();
