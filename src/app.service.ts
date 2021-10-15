@@ -11,7 +11,7 @@ import { NameInf } from './dto.interface';
  */
 @Injectable()
 export class AppService {
-  private readonly data: NameInf[] = [
+  private data: NameInf[] = [
     { name: '동수', class: 'python' },
     { name: '산해', class: 'c++' },
     { name: '종현', class: 'typscript' },
@@ -38,9 +38,11 @@ export class AppService {
    * 이 Service Method 는 POST Router 에서 요청을 받아서
    * Database 의 생성을 수행한다.
    */
-  addNewNameToList(): any {
+  addNewNameToList(newOne: any): any {
     // 비어있는곳
-    return;
+    this.data.push(newOne);
+
+    return this.data;
   }
 
   /**
@@ -53,7 +55,11 @@ export class AppService {
   /**
    * @name 개별_명단_삭제
    */
-  deleteClassToList(): any {
+  deleteClassToList(deleteOne: any): any {
+    const idx = this.data.indexOf(deleteOne);
+
+    this.data = this.data.slice(deleteOne);
+
     return;
   }
 }

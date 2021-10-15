@@ -1,4 +1,4 @@
-import { Controller, Delete, Get, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post, Put } from '@nestjs/common';
 import { AppService } from './app.service';
 import { NameInf } from './dto.interface';
 
@@ -8,6 +8,9 @@ import { NameInf } from './dto.interface';
 // 1. Data Field
 // 2. Method
 
+/**
+ * http://localhost:5000/app/
+ */
 @Controller('app') // localhost:5000 + /names
 export class AppController {
   constructor(private readonly appService: AppService) {}
@@ -47,8 +50,9 @@ export class AppController {
   }
 
   @Post('/new-one') // AppController 로 들어온 요청 중 localhost:5000/new-one 으로 온 Post 요청을 처리하라.
-  addNewName(): any {
-    return this.appService.addNewNameToList();
+  addNewName(@Body() newOne: any): any {
+    console.log(newOne);  // name: ~~ , class: ~~ 
+    return this.appService.addNewNameToList(newOne);
   }
 
   @Put('/update-one')
@@ -57,7 +61,7 @@ export class AppController {
   }
 
   @Delete('/delete-one')
-  deleteOne(): any {
-    return this.appService.deleteClassToList();
+  deleteOne(@Body() deleteOne: any): any {
+    return this.appService.deleteClassToList(deleteOne);
   }
 }
